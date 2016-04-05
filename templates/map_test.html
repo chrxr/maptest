@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <style>
+    #mapid { height: 500px; width: 500px }
+  </style>
+</head>
+<body>
+  <div id="mapid"></div>
+  <script   src="https://code.jquery.com/jquery-2.2.2.js"   integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE="   crossorigin="anonymous"></script>
+  <script>
+    var mymap = L.map('mapid').setView([51.752694, -1.253006], 13);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'chrxr.pje6m5lf',
+    accessToken: 'pk.eyJ1IjoiY2hyeHIiLCJhIjoiY2ltbWQweHNpMDAwOXdwbTEzZ3puaWZjZSJ9.MXbW4O3waxQ9TaQjpPaGzw'
+}).addTo(mymap);
+  //   $.ajax({
+  //   url:"../data_munge.py",
+  //   // dataType:"json",
+  //   success:function(msg){
+  //       console.log(msg)
+  //   },
+  //   error:function(msg) {
+  //     console.log("NAH!")
+  //   },
+  // });
+    {% for key, value in gpsdata.items() %}
+      var polyline = L.polyline([
+        {% for dp in value %}
+          {{ dp }},
+        {% endfor %}
+      ],{color:'red'}).addTo(mymap)
+    {% endfor %}
+  </script>
+
+</body>
+</html>
