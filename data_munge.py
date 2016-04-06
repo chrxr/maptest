@@ -1,4 +1,5 @@
 #! bin/python
+
 import os
 import json
 from flask import Flask, render_template, request
@@ -21,7 +22,10 @@ def inject_data():
         data = {}
         for filename in files:
             file_path = (subdir+'/'+filename)
-            soup = BeautifulSoup(open(file_path), 'xml')
+            try:
+                soup = BeautifulSoup(open(file_path), 'xml')
+            except(UnicodeDecodeError):
+                print(file_path)
             trps = soup.find_all('trkpt')
             local_points = []
             for point in trps:

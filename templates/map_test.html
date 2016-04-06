@@ -30,6 +30,7 @@
   //     console.log("NAH!")
   //   },
   // });
+  {% if gpsdata %}
     {% for key, value in gpsdata.items() %}
       var polyline = L.polyline([
         {% for dp in value %}
@@ -37,6 +38,7 @@
         {% endfor %}
       ],{color:'red'}).addTo(mymap)
     {% endfor %}
+  {% endif %}
   </script>
 
 </body>
