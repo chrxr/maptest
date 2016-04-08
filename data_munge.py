@@ -38,7 +38,7 @@ def inject_data():
     return dict(gpsdata=data)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app .run(host='0.0.0.0')
 if __name__ == "__main__":
     app.debug = True
     app.run()
