@@ -1,7 +1,7 @@
 import os
 import json
+import flask
 import six
-from flask import Flask, render_template, request
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
