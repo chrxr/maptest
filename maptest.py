@@ -34,7 +34,3 @@ def inject_data():
             data["data"+str(filenamer)] = local_points
             filenamer = filenamer + 1
     return dict(gpsdata=data)
-
-if __name__ == "__main__":
-    app.debug = True
-    app.run(host='0.0.0.0')
