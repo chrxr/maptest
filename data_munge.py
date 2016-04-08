@@ -1,8 +1,8 @@
 import os
 import json
-import flask
 import six
 from bs4 import BeautifulSoup
+import flask
 
 app = Flask(__name__)
 
