@@ -2,6 +2,7 @@
 
 import os
 import json
+import six
 from flask import Flask, render_template, request
 from bs4 import BeautifulSoup
 
@@ -25,7 +26,7 @@ def inject_data():
             try:
                 soup = BeautifulSoup(open(file_path), 'xml')
             except(UnicodeDecodeError):
-                print(file_path)
+                six.print_(file_path)
             trps = soup.find_all('trkpt')
             local_points = []
             for point in trps:
