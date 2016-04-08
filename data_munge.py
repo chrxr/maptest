@@ -37,21 +37,8 @@ def inject_data():
             filenamer = filenamer + 1
     return dict(gpsdata=data)
 
-#
-#
-# # filenamer = 1
-# #
-# # print(len(gps_points))
-#
-# # for points_set in gps_points:
-# #     filename = 'coords/points' + str(filenamer) + '.csv'
-# #     f = open(filename, 'w')
-# #     for point in points_set:
-# #         latlon = '['+ point[0] + ', ' + point[1] + '],\n'
-# #         f.write(latlon)
-# #     f.close()
-# #     filenamer = filenamer + 1
-
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
 if __name__ == "__main__":
     app.debug = True
     app.run()
