@@ -1,13 +1,12 @@
-#! bin/python
-
 import os
 import json
+import six
 from flask import Flask, render_template, request
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/runmap', methods=['GET', 'POST'])
 def index():
     return render_template('map_test.html')
 
@@ -25,7 +24,7 @@ def inject_data():
             try:
                 soup = BeautifulSoup(open(file_path), 'xml')
             except(UnicodeDecodeError):
-                print(file_path)
+                six.print_(file_path)
             trps = soup.find_all('trkpt')
             local_points = []
             for point in trps:
@@ -36,21 +35,5 @@ def inject_data():
             filenamer = filenamer + 1
     return dict(gpsdata=data)
 
-#
-#
-# # filenamer = 1
-# #
-# # print(len(gps_points))
-#
-# # for points_set in gps_points:
-# #     filename = 'coords/points' + str(filenamer) + '.csv'
-# #     f = open(filename, 'w')
-# #     for point in points_set:
-# #         latlon = '['+ point[0] + ', ' + point[1] + '],\n'
-# #         f.write(latlon)
-# #     f.close()
-# #     filenamer = filenamer + 1
-
 if __name__ == "__main__":
-    app.debug = True
-    app.run()
+    app.run(host='0.0.0.0')
