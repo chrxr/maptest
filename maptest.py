@@ -10,7 +10,11 @@ app = Flask(__name__)
 @app.route('/runmap/')
 @app.route('/runmap/<command>')
 def index(command = None):
-    r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    try:
+        r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    except(ConnectionError):
+        six.print_("Redis server isn't running")
+
     folder = os.path.dirname(os.path.realpath(__file__))+'/activities'
 
     if command == "clear":
@@ -18,7 +22,7 @@ def index(command = None):
         return render_template('map_test.html', gpsdata = routes)
     else:
         if r.get('data'):
-            routes = json.loads(r.get('data'))
+            routes = json.loads(r.get('data').decode())
             return render_template('map_test.html', gpsdata = routes)
         else:
             routes = generate_routes(folder, r)
